@@ -23,7 +23,9 @@ public class ContextMenuBuilder {
 
     public ContextMenuBuilder addItem(String name, Runnable action) {
         MenuItem item = new MenuItem(name);
-        item.setOnAction(e -> action.run());
+        if (action != null) {
+            item.setOnAction(e -> action.run());
+        }
         menuItems.add(item);
         return this;
     }

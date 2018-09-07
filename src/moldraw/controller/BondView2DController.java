@@ -28,7 +28,6 @@ import javafx.scene.shape.Rectangle;
 import moldraw.model.bonds.Bond;
 import moldraw.model.bonds.BondState;
 import moldraw.utils.ContextMenuBuilder;
-import moldraw.utils.Utils;
 
 /**
  * FXML Controller class
@@ -85,7 +84,11 @@ public class BondView2DController {
                 .addItem("Double Bond", () -> setBondState(BondState.DOUBLE))
                 .addItem("Triple Bond", () -> setBondState(BondState.TRIPLE))
                 .addItem("Partial Bond", () -> setBondState(BondState.PARTIAL))
-                .build();
+                .addItem("Delete", () -> {
+                    if (onDelete != null) {
+                        onDelete.run();
+                    }
+                }).build();
     }
 
     @FXML
@@ -163,8 +166,10 @@ public class BondView2DController {
     private void makeSingleBond() {
         singleBond.visibleProperty().bind(Bindings.createBooleanBinding(()
                 -> bond.getBondState() == BondState.SINGLE
-                && Utils.fuzzyEquals(zDifProperty.get(), 0, 2),
-                bond.bondStateProperty(), zDifProperty));
+                && bond.getVisualState() == VisualState.SHORT
+                || bond.getVisualState() == VisualState.NONE //                && Utils.fuzzyEquals(zDifProperty.get(), 0, 2)
+                ,
+                 bond.bondStateProperty(), /*zDifProperty*/ bond.visualStateProperty()));
     }
 
     private void makeDoubleBond() {
@@ -250,7 +255,8 @@ public class BondView2DController {
 
     private void makeTriangle() {
         triangle.visibleProperty().bind(singleBond.visibleProperty().not()
-                .and(bond.bondStateProperty().isEqualTo(BondState.SINGLE).and(zDifProperty.greaterThan(0))));
+                .and(bond.bondStateProperty().isEqualTo(BondState.SINGLE)
+                        .and(bond.visualStateProperty().isEqualTo(VisualState.RIGHT))));
         ObservableList<Double> pointsList = new ListBinding<Double>() {
 
             {
@@ -270,7 +276,8 @@ public class BondView2DController {
     @SuppressWarnings("empty-statement")
     private void makeReceding() {
         receding.visibleProperty().bind(singleBond.visibleProperty().not()
-                .and(bond.bondStateProperty().isEqualTo(BondState.SINGLE).and(zDifProperty.lessThan(0))));
+                .and(bond.bondStateProperty().isEqualTo(BondState.SINGLE)
+                        .and(bond.visualStateProperty().isEqualTo(VisualState.LEFT))));
         receding.translateXProperty().bind(startXProperty);
         receding.translateYProperty().bind(startYProperty.subtract(receding.heightProperty().divide(2)));
         receding.setAlignment(Pos.CENTER_LEFT);
@@ -304,6 +311,7 @@ public class BondView2DController {
                 VisualState prev = bond.getVisualState();
                 VisualState next;
                 switch (bond.getBondState()) {
+                    case SINGLE:
                     case DOUBLE:
                         switch (bond.getVisualState()) {
                             case LEFT:
@@ -387,8 +395,14 @@ public class BondView2DController {
     public double getDistance() {
         return distanceProperty.get();
     }
-    
+
     public Bond getBond() {
         return bond;
+    }
+
+    private Runnable onDelete;
+
+    public void setOnDelete(Runnable onDelete) {
+        this.onDelete = onDelete;
     }
 }

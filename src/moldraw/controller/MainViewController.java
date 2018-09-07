@@ -392,15 +392,16 @@ public class MainViewController implements Reporter {
         if (hangingRGroup == null) {
             FXMLLoader loader = Resources.getLoader("RGroupView2D.fxml");
             loader.setControllerFactory(clz -> new RGroupView2DController(this));
-            hangingRGroupNode = Resources.load(loader);
-            hangingRGroupNode.setMouseTransparent(true);
+            Node n = hangingRGroupNode = Resources.load(loader);
+            n.setMouseTransparent(true);
             RGroupView2DController controller = loader.getController();
             controller.setRGroup(r);
-            rGroupControllerMap.put(hangingRGroupNode, controller);
-            rGroupGroup.getChildren().add(hangingRGroupNode);
+            rGroupControllerMap.put(n, controller);
+            rGroupGroup.getChildren().add(n);
             hangingRGroup = r;
             cancelExcluding(EnumSet.of(Cancellable.PLACE_RGROUP));
             cancellables.add(Cancellable.PLACE_RGROUP);
+            controller.setOnDelete(() -> delete(r, n));
         }
     }
 
@@ -468,6 +469,12 @@ public class MainViewController implements Reporter {
         hangingRGroupNode = null;
     }
 
+    private void delete(RGroup rg, Node n) {
+        model.delete(rg);
+        rGroupControllerMap.remove(n);
+        rGroupGroup.getChildren().remove(n);
+    }
+
     /*
     ============================================================================
     
@@ -487,12 +494,14 @@ public class MainViewController implements Reporter {
             generateRGroupView(p.getValue());
             FXMLLoader loader = Resources.getLoader("BondView2D.fxml");
             loader.setControllerFactory(cls -> new BondView2DController(hangingBond, this));
-            hangingBondNode = Resources.load(loader);
+            Node n = hangingBondNode = Resources.load(loader);
+            BondView2DController controller = loader.getController();
             bondGroup.getChildren().add(hangingBondNode);
             cancellables.add(Cancellable.CONSTRUCT_BOND);
             angleWidget.setCenterX(r.getCenterX());
             angleWidget.setCenterY(r.getCenterY());
             angleWidget.setVisible(true);
+            controller.setOnDelete(() -> delete(p.getKey(), n));
         }
     }
 
@@ -1024,6 +1033,7 @@ public class MainViewController implements Reporter {
         controller.setRGroup(rgroup);
         rGroupControllerMap.put(n, controller);
         rGroupGroup.getChildren().add(n);
+        controller.setOnDelete(() -> delete(rgroup, n));
         return new Pair<>(n, controller);
     }
 
@@ -1032,6 +1042,8 @@ public class MainViewController implements Reporter {
         loader.setControllerFactory(clz -> new BondView2DController(b, this));
         Node n = Resources.load(loader);
         bondGroup.getChildren().add(n);
+        BondView2DController controller = loader.getController();
+        controller.setOnDelete(() -> delete(b, n));
         return n;
     }
 }

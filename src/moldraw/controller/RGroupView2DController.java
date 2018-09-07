@@ -79,7 +79,13 @@ public class RGroupView2DController {
     private ContextMenu makeContentMenu() {
         return ContextMenuBuilder.create().addItem("Add Charge", this::incrementCharge)
                 .addItem("Subtract Charge", this::decrementCharge)
-                .addItem("Join This", () -> reporter.reportJoin(root, getRGroup())).build();
+                .addItem("Join This", () -> reporter.reportJoin(root, getRGroup()))
+                .addItem("Delete", () -> {
+                    if (onDelete != null) {
+                        onDelete.run();
+                    }
+                }
+                ).build();
     }
 
     private static String getFormattedCharge(int charge) {
@@ -199,5 +205,11 @@ public class RGroupView2DController {
 
     private void shiftCharge(int amount) {
         getRGroup().setCharge(getRGroup().getCharge() + amount);
+    }
+
+    private Runnable onDelete;
+
+    public void setOnDelete(Runnable onDelete) {
+        this.onDelete = onDelete;
     }
 }
