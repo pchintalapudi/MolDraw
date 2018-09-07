@@ -252,9 +252,42 @@ public class MainViewController implements Reporter {
                 cancel();
                 k.consume();
                 break;
+            case ENTER:
             case SPACE:
                 rightMenu.elementChoice();
                 break;
+            case DELETE:
+                deleteSelected();
+                break;
+            case NUMPAD0:
+                reportMakeAtom(Element.CARBON);
+                break;
+            case NUMPAD1:
+                reportMakeAtom(Element.HYDROGEN);
+                break;
+            case NUMPAD2:
+                reportMakeAtom(Element.OXYGEN);
+                break;
+            case NUMPAD3:
+                reportMakeAtom(Element.NITROGEN);
+                break;
+            case NUMPAD4:
+                reportMakeAtom(Element.PHOSPHORUS);
+                break;
+            case NUMPAD5:
+                reportMakeAtom(Element.SULFUR);
+                break;
+            case NUMPAD6:
+                reportMakeAtom(Element.CHLORINE);
+                break;
+            case NUMPAD7:
+                reportMakeAtom(Element.SODIUM);
+                break;
+            case NUMPAD8:
+                reportMakeAtom(Element.BROMINE);
+                break;
+            case NUMPAD9:
+                reportMakeAtom(Element.IODINE);
         }
     }
 

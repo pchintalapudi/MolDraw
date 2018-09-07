@@ -5,13 +5,21 @@
  */
 package moldraw.controller;
 
+import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.List;
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.util.Pair;
 import moldraw.model.targets.Element;
 import moldraw.resources.Resources;
 import moldraw.utils.Utils;
@@ -31,6 +39,12 @@ public class RightMenu extends VBox {
     private RotateAssist rotateAssist;
     @FXML
     private Minimap minimap;
+    @FXML
+    private TableView<Pair<Element, Integer>> shortcutTable;
+    @FXML
+    private TableColumn<Pair<Element, Integer>, Integer> keyCol;
+    @FXML
+    private TableColumn<Pair<Element, Integer>, Element> elementCol;
 
     private Element lastSelected;
 
@@ -38,9 +52,20 @@ public class RightMenu extends VBox {
         Resources.loadFXMLAsRoot("RightMenu.fxml", this);
     }
 
+    private static final List<Element> elementBindings = Arrays.asList(Element.CARBON,
+            Element.HYDROGEN, Element.OXYGEN, Element.NITROGEN, Element.PHOSPHORUS,
+            Element.SULFUR, Element.CHLORINE, Element.SODIUM, Element.BROMINE, Element.IODINE);
+
     @FXML
     private void initialize() {
         createElementMenu();
+        ObservableList<Pair<Element, Integer>> list = FXCollections.observableArrayList();
+        for (int i = 0; i < elementBindings.size(); i++) {
+            list.add(new Pair<>(elementBindings.get(i), i));
+        }
+        shortcutTable.setItems(list);
+        elementCol.setCellValueFactory(cdf -> new ReadOnlyObjectWrapper(cdf.getValue().getKey()));
+        keyCol.setCellValueFactory(cdf -> new ReadOnlyObjectWrapper(cdf.getValue().getValue()));
     }
 
     private Reporter reporter;
