@@ -251,6 +251,10 @@ public class MainViewController implements Reporter {
             case ESCAPE:
                 cancel();
                 k.consume();
+                break;
+            case SPACE:
+                rightMenu.elementChoice();
+                break;
         }
     }
 

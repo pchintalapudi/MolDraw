@@ -6,10 +6,7 @@
 package moldraw.controller;
 
 import java.util.EnumSet;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SplitMenuButton;
@@ -66,8 +63,7 @@ public class RightMenu extends VBox {
         }).forEach(elementChoice.getItems()::add);
     }
 
-    @FXML
-    private void elementChoice() {
+    public void elementChoice() {
         if (lastSelected == null) {
             elementChoice.show();
         } else {
