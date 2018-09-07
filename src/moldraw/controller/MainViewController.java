@@ -341,7 +341,7 @@ public class MainViewController implements Reporter {
         Set<Node> rGroupNodes = root.lookupAll(".selected");
         rGroupNodes.forEach(rGroupGroup.getChildren()::remove);
         Set<Node> bondNodes = root.lookupAll(".bond").stream().filter(n
-                -> deletedBonds.contains(((BondView2DController) n.getUserData()).getBond()))
+                -> deletedBonds.contains((Bond) n.getUserData()))
                 .peek(bondGroup.getChildren()::remove).collect(Collectors.toSet());
         properties.getUndoManager().log(() -> {
             bondGroup.getChildren().removeAll(bondNodes);
@@ -470,9 +470,21 @@ public class MainViewController implements Reporter {
     }
 
     private void delete(RGroup rg, Node n) {
-        model.delete(rg);
-        rGroupControllerMap.remove(n);
+        Set<Bond> deletedBonds = model.delete(rg);
         rGroupGroup.getChildren().remove(n);
+        Set<Node> bondNodes = root.lookupAll(".bond").stream().filter(node
+                -> deletedBonds.contains((Bond) node.getUserData()))
+                .peek(bondGroup.getChildren()::remove).collect(Collectors.toSet());
+        properties.getUndoManager().log(() -> {
+            bondGroup.getChildren().removeAll(bondNodes);
+            rGroupGroup.getChildren().remove(n);
+            model.delete(rg);
+        }, () -> {
+            model.add(rg);
+            deletedBonds.forEach(model::add);
+            rGroupGroup.getChildren().add(n);
+            bondGroup.getChildren().addAll(bondNodes);
+        });
     }
 
     /*
@@ -588,8 +600,13 @@ public class MainViewController implements Reporter {
     }
 
     private void delete(Bond b, Node n) {
-        model.delete(b);
-        bondGroup.getChildren().remove(n);
+        properties.getUndoManager().doAndLog(() -> {
+            model.delete(b);
+            bondGroup.getChildren().remove(n);
+        }, () -> {
+            model.add(b);
+            bondGroup.getChildren().add(n);
+        });
     }
 
     /*
