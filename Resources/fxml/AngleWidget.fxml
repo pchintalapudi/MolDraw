@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Arc?>
+
+<fx:root pickOnBounds="false" type="Pane" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Arc fx:id="tracer" fill="BLACK" length="${controller.angle * 180 / 3.141592653589793}" mouseTransparent="true" radiusX="${controller.length}" radiusY="${controller.length}" stroke="BLACK" strokeType="INSIDE" styleClass="angle-tracer" type="ROUND" />
+        <Label fx:id="angleLabel" onMouseClicked="#labelClick" styleClass="angle-label" text="Label" />
+        <TextField fx:id="angleEdit" onAction="#finishEdit" prefWidth="100.0" promptText="Angle (Deg)" styleClass="angle-editor" visible="${!angleLabel.visible}" />
+    </children>
+</fx:root>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.transform.Rotate?>
+<?import moldraw.model.bonds.BondState?>
+
+<Group fx:id="root" styleClass="bond" onMouseClicked="#onClick" pickOnBounds="false" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moldraw.controller.BondView2DController">
+    <children>        
+        <Line fx:id="singleBond" startX="${controller.startX}" startY="${controller.startY}" endX="${controller.startX + controller.distance}" endY="${singleBond.startY}" styleClass="single-bond" />
+        <Line fx:id="clickSurface" endX="${singleBond.endX}" endY="${singleBond.endY}" startX="${singleBond.startX}" startY="${singleBond.startY}" styleClass="click-surface" />
+        <Line fx:id="dashedBond" endX="${singleBond.endX}" endY="${singleBond.endY}" startX="${singleBond.startX}" startY="${singleBond.startY}" styleClass="dashed-bond" />
+        <Group fx:id="doubleBondGroup">
+            <children>
+                <Line fx:id="doubleBond1" endY="${doubleBond1.startY}" styleClass="double-bond" />
+                <Line fx:id="doubleBond2" endX="${singleBond.endX}" endY="${doubleBond2.startY}" startX="${singleBond.startX}" styleClass="double-bond" />
+            </children>
+        </Group>
+        <Group fx:id="tripleBondGroup">
+            <children>
+                <Line fx:id="tripleBond1" endY="${tripleBond1.startY}" startY="${controller.startY - 5}" styleClass="triple-bond" />
+                <Line endX="${singleBond.endX}" endY="${singleBond.endY}" startX="${singleBond.startX}" startY="${singleBond.startY}" styleClass="triple-bond" />
+                <Line fx:id="tripleBond3" endX="${tripleBond1.endX}" startX="${tripleBond1.startX}" startY="${controller.startY + 5}" endY="${tripleBond3.startY}" styleClass="triple-bond" />
+            </children>
+        </Group>
+        <Polygon fx:id="triangle" strokeType="INSIDE" />
+        <HBox fx:id="receding" />
+    </children>
+    <transforms>
+        <Rotate pivotX="${singleBond.startX}" pivotY="${singleBond.startY}" angle="${controller.angle * 180 / 3.141592653589793}"/>
+    </transforms>
+</Group>

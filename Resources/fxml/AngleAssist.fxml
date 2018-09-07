@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root alignment="TOP_CENTER" styleClass="standard-vbox" type="VBox" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="Polygon Side Count" />
+        <Slider fx:id="sideSlider" blockIncrement="1.0" majorTickUnit="2.0" max="23.0" min="3.0" minorTickCount="1" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="2.0" />
+        <TextField fx:id="angleEdit" maxWidth="-Infinity" prefWidth="125.0" promptText="Start Angle (Deg)" onAction="#onEditFinish"/>
+        <ListView fx:id="resultBox" prefHeight="200.0" VBox.vgrow="ALWAYS" />
+    </children>
+</fx:root>

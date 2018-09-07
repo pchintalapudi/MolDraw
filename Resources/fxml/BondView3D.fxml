@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import moldraw.controller.Line3D?>
+
+
+<Group xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Line3D fx:id="singleBond"/>
+        <Group fx:id="doubleBond">
+            <children>
+                <Line3D fx:id="doubleBond1" />
+                <Line3D fx:id="doubleBond2" />
+            </children>
+        </Group>
+        <Group fx:id="tripleBond">
+            <children>
+                <Line3D fx:id="tripleBond1" />
+                <Line3D fx:id="tripleBond2" />
+                <Line3D fx:id="tripleBond3" />
+            </children>
+        </Group>
+    </children>
+</Group>

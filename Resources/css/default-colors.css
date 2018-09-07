@@ -1,0 +1,43 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 9, 2018, 8:57:23 AM
+    Author     : prem
+*/
+
+*{
+    /*
+    ============================================================================
+    
+    Color definitions
+    
+    ============================================================================
+    */
+
+    -default1-base:rgb(0%, 50%, 100%);
+    -default2-base:rgb(37.5%, 75%, 37.5%);
+    -default3-base:rgb(100%, 0%, 0%);
+
+    -default1-xlight:rgba(0%, 50%, 100%, 0.05);
+    -default2-xlight:rgba(37.5%, 75%, 37.5%, 0.05);
+    -default3-xlight:rgba(100%, 0%, 0%, 0.05);
+
+    -default1-light:rgba(0%, 50%, 100%, 0.1);
+    -default2-light:rgba(37.5%, 75%, 37.5%, 0.1);
+    -default3-light:rgba(100%, 0%, 0%, 0.1);
+
+    -default1-medium:rgba(0%, 50%, 100%, 0.25);
+    -default2-medium:rgba(37.5%, 75%, 37.5%, 0.25);
+    -default3-medium:rgba(100%, 0%, 0%, 0.25);
+
+    -default1-heavy:rgba(0%, 50%, 100%, 0.5);
+    -default2-heavy:rgba(37.5%, 75%, 37.5%, 0.5);
+    -default3-heavy:rgba(100%, 0%, 0%, 0.5);
+
+    -default1-xheavy:rgba(0%, 50%, 100%, 0.75);
+    -default2-xheavy:rgba(37.5%, 75%, 37.5%, 0.75);
+    -default3-xheavy:rgba(100%, 0%, 0%, 0.75);
+}

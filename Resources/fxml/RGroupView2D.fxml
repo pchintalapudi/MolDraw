@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane fx:id="root" onMouseClicked="#onClick" onMouseDragged="#onDrag" onMousePressed="#onPress" styleClass="atom"
+      xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="moldraw.controller.RGroupView2DController"
+      translateX="${controller.centerX - name.width / 2}" translateY="${controller.centerY - name.height / 2}">
+    <children>
+        <Rectangle fx:id="backing" strokeType="INSIDE" styleClass="backing" />
+        <Label fx:id="name" styleClass="name" text="${controller.name}" visible="${controller.nameVisible}"/>
+        <Label fx:id="charge" styleClass="charge" text="${controller.charge}" translateX="${name.width}" translateY="${-charge.height / 2}"/>
+    </children>
+</Pane>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<fx:root type="StackPane" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fx:id="image" fitHeight="175.0" fitWidth="260.0" pickOnBounds="true" preserveRatio="true" />
+        <Pane>
+            <children>
+                <Rectangle fx:id="view" onMouseDragged="#drag" onMousePressed="#press" strokeType="INSIDE" styleClass="minimap-box" />
+            </children>
+        </Pane>
+    </children>
+</fx:root>

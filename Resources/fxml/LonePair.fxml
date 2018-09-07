@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+
+
+<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Circle radius="${controller.radius}" strokeType="INSIDE" visible="${controller.leftVisible}"/>
+        <Circle radius="${controller.radius}" strokeType="INSIDE" visible="${controller.rightVisible}"/>
+    </children>
+</HBox>

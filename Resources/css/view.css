@@ -1,0 +1,99 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jun 19, 2018, 1:57:53 PM
+    Author     : prem
+*/
+
+.base {
+    -fx-background-color:white;
+}
+
+.base:loading {
+    -fx-cursor:wait;
+}
+
+.drawing-pane {
+    -fx-background-color:white;
+}
+
+.d3-pane {
+    -fx-background-color:radial-gradient(center 50% 50%, radius 100%, cornsilk, royalblue);
+}
+
+.action-menu, .standard-vbox {
+    -fx-spacing:15;
+    -fx-padding:15;
+    -fx-background-color:derive(white, -5%);
+}
+
+.button, .split-menu-button {
+    -fx-border-color:-default1-base;
+}
+
+.button, .split-menu-button > .label, .split-menu-button > .arrow-button, .split-menu-button {
+    -fx-background-color:white;
+}
+
+.button:hover, .split-menu-button > .label:hover, .split-menu-button > .arrow-button:hover {
+    -fx-background-color:-default1-light;
+}
+
+.button:pressed, .split-menu-button > .label:pressed, .split-menu-button > .arrow-button:pressed {
+    -fx-background-color:-default1-medium;
+}
+
+.menu-bar {
+    -fx-background-color:derive(white, -10%);
+}
+
+.select-rectangle {
+    -fx-fill:-default1-medium;
+    -fx-stroke:-default1-heavy;
+    -fx-stroke-width:1.5;
+}
+
+.atom {
+    -fx-background-color:white;
+    -fx-font-size:18;
+}
+
+.selected {
+    -fx-effect:dropshadow(gaussian, blue, 10, 0, 0, 0);
+}
+
+.atom:highlight {
+    -fx-effect:dropshadow(gaussian, lime, 10, 0, 0, 0);
+}
+
+.dashed-bond {
+    -fx-stroke-dash-array: 5 5 5 5;
+}
+
+.click-surface {
+    -fx-stroke:transparent;
+    -fx-stroke-width:20;
+}
+
+.angle-tracer {
+    -fx-stroke:black;
+    -fx-fill:transparent;
+    -fx-stroke-dash-array: 5 5 5 5;
+}
+
+.angle-label {
+    -fx-font-size:18;
+}
+
+.minimap-box {
+    -fx-fill:transparent;
+    -fx-stroke:black;
+    -fx-stroke-width:1.5;
+}
+
+.backing {
+    -fx-fill:white;
+}
